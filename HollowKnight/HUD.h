@@ -8,6 +8,7 @@
 class HUD : public Singleton<HUD>, public IManager<string, Canvas>
 {
 	vector<Button*> buttons;
+	int indexHorveredButton;
 	vector<ScrollBar*> scrollBars;
 
 public:
@@ -23,5 +24,14 @@ public:
 public:
 	void Interact(const Vector2f& _worldPosition, const Event& _event);
 	Button* GetHoveredButton(const vector<Button*>& _buttons);
+	int GetHoveredButtonIndex(const vector<Button*>& _buttons);
 	Button* GetPressedButton(const vector<Button*>& _buttons);
+	int GetIndexHorveredButton() const
+	{
+		return indexHorveredButton;
+	}
+	void SetIndexHorveredButton(const int _index)
+	{
+		indexHorveredButton = _index;
+	}
 };

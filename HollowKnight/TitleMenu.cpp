@@ -81,14 +81,18 @@ void TitleMenu::Init()
 		const float _buttonPosY = _gridPosY + _buttonSize.y * _index + _gapY * _index;
 		const Vector2f& _buttonPos = Vector2f(_gridPosX, _buttonPosY);
 		Button* _button = new Button(ShapeData(_buttonPos, _buttonSize, ""));
+
 		_button->GetData().hoveredCallback = [&]()
 		{
 			if (Button* _hoveredButton = HUD::GetInstance().GetHoveredButton(buttons))
 			{
-				MovePointers(_hoveredButton);
+				HUD::GetInstance().SetIndexHorveredButton(HUD::GetInstance().GetHoveredButtonIndex(buttons));
 			}
+			MovePointers(buttons[HUD::GetInstance().GetIndexHorveredButton()]);
+
 		};
 		_button->GetData().pressedCallback = _allData[_index].callback;
+
 
 		_button->GetDrawable()->setFillColor(Color::Transparent);
 		buttons.push_back(_button);
